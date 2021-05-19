@@ -1,7 +1,17 @@
-import 'package:flutter/material.dart';
-
 class NotesList {
-  TextEditingController notesController = TextEditingController();
+  final String notes;
 
-  NotesList({this.notesController});
+  NotesList({this.notes});
+
+  factory NotesList.fromJson(Map<String, dynamic> parsedJson) {
+    return new NotesList(
+      notes: parsedJson['notes'] ?? "",
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "notes": this.notes,
+    };
+  }
 }

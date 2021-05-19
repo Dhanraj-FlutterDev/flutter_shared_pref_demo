@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shared_pref_demo/home.dart';
+// import 'package:flutter_shared_pref_demo/home.dart';
 import 'package:flutter_shared_pref_demo/login_page.dart';
+import 'package:flutter_shared_pref_demo/screens/new_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,29 +13,29 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   SharedPreferences sharedPreferences;
-  String userEmail;
+  String newUserEmail;
 
   @override
   void initState() {
     getUserData().whenComplete(() async {
       Timer(Duration(seconds: 3),
-          () => userEmail == null ? gotoLogin() : gotoHome());
+          () => newUserEmail == null ? gotoLogin() : gotoHome());
     });
     super.initState();
   }
 
-  _intiTimer() async {
-    Timer(Duration(seconds: 3), userEmail == null ? gotoLogin() : gotoHome());
-  }
+  // _intiTimer() async {
+  //   Timer(Duration(seconds: 3), userEmail == null ? gotoLogin() : gotoHome());
+  // }
 
   Future getUserData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var obtainEmail = sharedPreferences.getString('email');
+    var obtainEmail = sharedPreferences.getString('mail');
     setState(() {
-      userEmail = obtainEmail;
+      newUserEmail = obtainEmail;
     });
-    print('user email is $userEmail');
+    print('user email is $newUserEmail');
   }
 
   // getUser() async {
@@ -66,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
   gotoHome() async {
     await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (BuildContext context) => Home(),
+          builder: (BuildContext context) => NotesHome(),
         ),
         (Route<dynamic> route) => false);
   }

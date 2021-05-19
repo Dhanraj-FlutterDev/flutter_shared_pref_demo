@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared_pref_demo/home.dart';
+import 'package:flutter_shared_pref_demo/screens/new_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -94,8 +94,8 @@ class _LoginPageState extends State<LoginPage> {
   signInCall() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    sharedPreferences.setString('email', emailController.text.toString());
+    sharedPreferences.setString('mail', emailController.text.toString());
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+        MaterialPageRoute(builder: (context) => NotesHome()), (route) => false);
   }
 }
