@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shared_pref_demo/home.dart';
 // import 'package:flutter_shared_pref_demo/home.dart';
 import 'package:flutter_shared_pref_demo/login_page.dart';
 import 'package:flutter_shared_pref_demo/screens/new_home.dart';
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
   gotoHome() async {
     await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (BuildContext context) => NotesHome(),
+          builder: (BuildContext context) => Home(),
         ),
         (Route<dynamic> route) => false);
   }

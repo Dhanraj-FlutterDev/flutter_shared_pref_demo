@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shared_pref_demo/home.dart';
 import 'package:flutter_shared_pref_demo/screens/new_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -109,6 +110,6 @@ class _LoginPageState extends State<LoginPage> {
         await SharedPreferences.getInstance();
     sharedPreferences.setString('mail', emailController.text.toString());
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => NotesHome()), (route) => false);
+        MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
 }

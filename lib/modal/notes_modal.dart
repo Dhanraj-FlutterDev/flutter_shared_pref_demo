@@ -1,17 +1,13 @@
 class NotesList {
-  final String notes;
+  String note;
 
-  NotesList({this.notes});
+  NotesList({this.note});
 
-  factory NotesList.fromJson(Map<String, dynamic> parsedJson) {
-    return new NotesList(
-      notes: parsedJson['notes'] ?? "",
-    );
-  }
+  NotesList.fromMap(Map map) : this.note = map['title'];
 
-  Map<String, dynamic> toJson() {
+  Map toMap() {
     return {
-      "notes": this.notes,
+      'title': this.note,
     };
   }
 }
