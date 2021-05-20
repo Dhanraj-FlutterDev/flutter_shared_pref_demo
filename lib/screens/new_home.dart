@@ -29,7 +29,6 @@ class _NotesHomeState extends State<NotesHome> {
 
   getNotesData() async {
     sharedPreferences = await SharedPreferences.getInstance();
-
     notess.addAll(Iterable.castFrom(
         jsonDecode(sharedPreferences.getString('useradded')) ?? ''));
 
@@ -204,6 +203,8 @@ class _NotesHomeState extends State<NotesHome> {
                                                       'notess remove value ${notess.elementAt(index)}');
                                                   notess.remove(
                                                       notess.elementAt(index));
+                                                      _notify();
+                                                      sharedPreferences.setString('useradded', jsonEncode(notess));
                                                   //getNotesData();
                                                   print(notess);
                                                   Navigator.pop(
