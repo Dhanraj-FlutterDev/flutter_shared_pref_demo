@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     getUserData().whenComplete(() async {
       Timer(Duration(seconds: 3),
-          () => newUserEmail == null ? gotoLogin() : gotoHome());
+          () => newUserEmail != null ? gotoHome() : gotoLogin());
     });
     super.initState();
   }
@@ -37,24 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
     print('user email is $newUserEmail');
   }
-
-  // getUser() async {
-  //   try {
-  //     sharedPreferences = await SharedPreferences.getInstance();
-  //     if (sharedPreferences == null) {
-  //       gotoLogin();
-  //     } else {
-  //       var getEmail = sharedPreferences.getString('email');
-  //       setState(() {
-  //         userEmail = getEmail;
-  //       });
-  //       print(userEmail);
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //     gotoLogin();
-  //   }
-  // }
 
   gotoLogin() async {
     await Navigator.of(context).pushAndRemoveUntil(

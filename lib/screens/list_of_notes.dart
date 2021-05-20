@@ -1,23 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shared_pref_demo/modal/notes_modal.dart';
-import 'package:flutter_shared_pref_demo/notes_pref.dart';
-import 'package:flutter_shared_pref_demo/screens/new_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddNewNoted extends StatefulWidget {
   bool isEditing;
-  String intivalue;
   String indexValue;
   bool toDelete;
 
   AddNewNoted(
-      {@required this.isEditing,
-      this.intivalue,
-      this.indexValue,
-      this.toDelete,
-      Key key})
+      {@required this.isEditing, this.indexValue, this.toDelete, Key key})
       : super(key: key);
 
   @override
@@ -28,7 +20,7 @@ class _AddNewNotedState extends State<AddNewNoted> {
   TextEditingController addNewNotesController = TextEditingController();
   String addedNotes;
   SharedPreferences sharedPreferences;
-  NotesList notesList;
+  //NotesList notesList;
   List<String> oldValue = [];
 
   setNote() async {
@@ -53,19 +45,6 @@ class _AddNewNotedState extends State<AddNewNoted> {
     print(sharedPreferences.getString('useradded'));
   }
 
-  // setNoteList() async {
-  //   sharedPreferences = await SharedPreferences.getInstance();
-  //   List oldNotesValue = sharedPreferences.getStringList('newvalue');
-
-  //   if (addNewNotesController.text.isNotEmpty) {
-  //     oldNotesValue.add(addNewNotesController.text.toString());
-  //   } else {
-  //     print('empty');
-  //   }
-  //   sharedPreferences.setStringList('newvalue', jsonEncode(oldNotesValue));
-  //   print(sharedPreferences.getString('useradded'));
-  // }
-
   _notify() {
     if (mounted) setState(() {});
   }
@@ -74,7 +53,7 @@ class _AddNewNotedState extends State<AddNewNoted> {
   void initState() {
     super.initState();
     if (widget.isEditing) {
-      addNewNotesController.text = widget.intivalue;
+      addNewNotesController.text = widget.indexValue;
     } else {
       addNewNotesController.text = "";
     }
@@ -85,9 +64,30 @@ class _AddNewNotedState extends State<AddNewNoted> {
     print(addedNotes);
     return Scaffold(
       appBar: AppBar(
-        title: widget.isEditing && widget.toDelete
-            ? Text('Delete')
-            : Text('Add/Edit'),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: widget.toDelete
+            ? Text(
+                'Delete',
+                style: TextStyle(color: Colors.black, fontSize: 16),
+              )
+            : widget.isEditing
+                ? Text(
+                    'Edit',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  )
+                : Text(
+                    'Add',
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
       body: Container(
         margin: EdgeInsets.only(top: 16, left: 16, right: 16),

@@ -20,7 +20,12 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Login Page'),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: Text(
+          'Login Page',
+          style: TextStyle(color: Colors.black, fontSize: 16),
+        ),
       ),
       body: Container(
         margin: EdgeInsets.all(16),
@@ -75,10 +80,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   onLogin() {
-    if (emailController.text == "") {
+    if (emailController.text.trim() == "") {
       print('Please Enter Email');
-    } else if (passwordController.text == "") {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Please Enter Email')));
+    } else if (!isValidEmail(emailController.text.trim())) {
+      print('Invalid Email');
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Email Not Valid')));
+    } else if (passwordController.text.trim() == "") {
       print('Please Enter Password');
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Please Enter Password')));
     } else {
       signInCall();
     }
